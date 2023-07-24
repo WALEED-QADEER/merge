@@ -1,13 +1,14 @@
 <h3> Creator Id : <%= current_user.id %></h3>
 <%= form_with model: @task do |form| %>
 
-  <div>
+  <div class="field">
   <%= form.label :task_type %>
-  <%= form.select :task_type, options_for_select([["Bug", "Bug"], ["Feature", "Feature"]]), {}, class: "form-control" %>
-  <% @task.errors.full_messages_for(:task_type).each do |message| %>
+  <%= form.select :task_type, options_for_select(['Feature', 'Bug']), include_blank: "Select Task Type"  %>
+</div>
+<% @task.errors.full_messages_for(:task_type).each do |message| %>
     <div><%= message %></div>
     <% end %>
-  </div>
+  
 
 
     <div>
@@ -21,7 +22,7 @@
 
     <div>
       <%= form.label :ScreenShot %><br>
-      <%= form.file_field :ss %>
+      <%= form.file_field :ss, accept: 'image/png, image/gif'  %>
       <% @task.errors.full_messages_for(:ss).each do |message| %>
         <div><%= message %></div>
       <% end %>
@@ -68,13 +69,14 @@
 <% end %>
 </div>
 
-<div>
-  <%= form.label :status %>
-  <%= form.select :status, Task.statuses.keys.map { |status| [status.humanize, status] } %>
+<div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, Task.statuses.keys.map { |status| [status.humanize, status] } %>
+  </div>
   <% @task.errors.full_messages_for(:status).each do |message| %>
     <div><%= message %></div>
   <% end %>
-</div>
+
 
 
 
