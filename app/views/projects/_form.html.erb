@@ -1,0 +1,71 @@
+<h3> Creator Id:  <%= current_user.id %> </h3>
+<%= form_with model: @project, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |form| %>
+    <div>
+      <%= form.label :name %><br>
+      <%= form.text_field :name %>
+      <% @project.errors.full_messages_for(:name).each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+    </div>
+
+   
+
+
+<div>
+        <%= form.label :completion_date, "Completion Date:" %>
+<% if @project.date.present? %>
+  <%= form.datetime_field :date, value: @project.date.strftime('%Y-%m-%dT%H:%M:%S') %>
+<% else %>
+  <%= form.datetime_field :date %>
+  <% @project.errors.full_messages_for(:date).each do |message| %>
+    <div><%= message %></div>
+<% end %>
+<% end %>
+</div>
+    
+<div>
+  <%= form.label :status %>
+  <%= form.select :status, Project.statuses.keys.map { |status| [status.humanize, status] } %>
+  <% @project.errors.full_messages_for(:project).each do |message| %>
+    <div><%= message %></div>
+  <% end %>
+</div>
+
+
+<style>
+.hidden-field {
+  visibility: hidden;
+}
+</style>
+
+ 
+<%= form.number_field :creator, :value => current_user.id, :readonly => true, class: "hidden-field"%>
+<% @project.errors.full_messages_for(:creator).each do |message| %>
+<div><%= message %></div>
+<% end %>
+
+
+
+
+
+
+<template data-nested-form-target="template">
+<%= form.fields_for :memberships, Membership.new, child_index: 'NEW_RECORD' do |membership_fields| %>
+  <%= render "member_form", f: membership_fields %>
+<% end %>
+</template>
+
+<%= form.fields_for :memberships do |membership_fields| %>
+<%= render "member_form", f: membership_fields %>
+<% end %>
+
+<!-- Inserted elements will be injected before that target. -->
+<div data-nested-form-target="target"></div>
+
+<button type="button" data-action="nested-form#add">Add User</button>
+
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
+  

@@ -1,0 +1,105 @@
+<h3> Creator Id : <%= current_user.id %></h3>
+<%= form_with model: @task do |form| %>
+
+  <div>
+  <%= form.label :task_type %>
+  <%= form.select :task_type, options_for_select([["Bug", "Bug"], ["Feature", "Feature"]]), {}, class: "form-control" %>
+  <% @task.errors.full_messages_for(:task_type).each do |message| %>
+    <div><%= message %></div>
+    <% end %>
+  </div>
+
+
+    <div>
+      <%= form.label :description %><br>
+      <%= form.text_field :description %>
+      <% @task.errors.full_messages_for(:description).each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+    </div>
+
+
+    <div>
+      <%= form.label :ScreenShot %><br>
+      <%= form.file_field :ss %>
+      <% @task.errors.full_messages_for(:ss).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    
+  
+    <div>
+    <%= form.label :user_id  %><br>
+    
+    <%= form.collection_select :user_id, User.where(role: 0),:id,:email, include_blank: "Select an User" %>
+    <% @task.errors.full_messages_for(:user_id).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+        </div>
+
+
+
+
+<br>
+  <%= form.label :project_id %>
+  
+  <br>
+
+
+  <%= text_field_tag :search_project, '', id: 'search_project' %>
+  <br>
+  <%= form.select :project_id, options_for_select(project_options), { include_blank: true }, id: 'project_dropdown' %>
+
+
+
+
+
+
+        <div>
+        <%= form.label :completion_date, "Completion Date:" %>
+<% if @task.completion_date.present? %>
+  <%= form.datetime_field :completion_date, value: @task.completion_date.strftime('%Y-%m-%dT%H:%M:%S') %>
+<% else %>
+  <%= form.datetime_field :completion_date %>
+  <% @task.errors.full_messages_for(:completion_date).each do |message| %>
+    <div><%= message %></div>
+<% end %>
+<% end %>
+</div>
+
+<div>
+  <%= form.label :status %>
+  <%= form.select :status, Task.statuses.keys.map { |status| [status.humanize, status] } %>
+  <% @task.errors.full_messages_for(:status).each do |message| %>
+    <div><%= message %></div>
+  <% end %>
+</div>
+
+
+
+
+
+
+<style>
+  .hidden-field {
+    visibility: hidden;
+  }
+</style>
+
+<div>
+  <%= form.number_field :created_by_id, value: current_user.id, readonly: true, class: 'hidden-field' %>
+  <% @task.errors.full_messages_for(:created_by_id).each do |message| %>
+    <div><%= message %></div>
+  <% end %>
+</div>
+
+
+    
+
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
+
+  

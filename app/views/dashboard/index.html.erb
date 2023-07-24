@@ -1,0 +1,17 @@
+<% if current_user.qa? or current_user.manager? %>
+<%= link_to 'Projects', projects_path %>
+<br>
+<% end %>
+<%= link_to 'Tasks', tasks_path %>
+<br>
+<% if user_signed_in? %>
+    <br>
+    <%= link_to 'User Edit', edit_user_registration_path %>
+    <br>
+    <%= link_to 'User Signout', destroy_user_session_path, method: :delete %>
+<% else %>
+    <br>
+    <%= link_to 'User Signup', new_user_registration_path %>
+    <br>
+    <%= link_to 'User Signin', new_user_session_path %>
+<% end %>

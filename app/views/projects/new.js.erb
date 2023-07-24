@@ -1,0 +1,16 @@
+$(document).ready(function() {
+  var userFields = `<%= j(render partial: 'user_fields', locals: { user: User.new }) %>`;
+  
+  $('.add_user_fields').click(function(e) {
+    e.preventDefault();
+    var time = new Date().getTime();
+    var regexp = new RegExp('new_' + 'users', 'g');
+    $('#user_emails').append(userFields.replace(regexp, time));
+  });
+
+  $(document).on('click', '.remove_user_fields', function(e) {
+    e.preventDefault();
+    var userId = $(this).data('user-id');
+    $(`[data-user-id="${userId}"]`).remove();
+  });
+});

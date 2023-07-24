@@ -1,0 +1,20 @@
+<%= link_to 'Home', root_path %>
+<h1>Task Type: <%= @task.task_type %></h1>
+<p>Description: <%= @task.description %></p>
+<p>Status: <%= @task.status %></p>
+<p>project_id: <%= @task.project_id %></p>
+<p>Project Name: <%= @task.project.name %></p>
+<p>Coder id: <%= @task.user_id %></p>
+<p>Coder Email: <%= @task.task_assigned_user.email %></p>
+<p>Creator id: <%= @task.created_by_id %></p>
+<p>Creator Email: <%= @task.created_by_user.email %></p>
+<p>Completion Date: <%= @task.completion_date %></p>
+
+<% if @task.ss.attached? %>
+<h4>ScreenShot</h4>
+    <image src="<%=(url_for(@task.ss))%>">
+<% end %>
+
+
+
+
