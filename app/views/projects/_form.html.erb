@@ -1,5 +1,5 @@
 <h3> Creator Id:  <%= current_user.id %> </h3>
-<%= form_with model: @project, local: true do |f| %>
+<%= form_with model: @project do |f| %>
     <div>
       <%= f.label :name %><br>
       <%= f.text_field :name %>
@@ -48,14 +48,14 @@
 
 
 
-<fieldset>
-    <legend>Users:</legend>
-    <%= f.fields_for :memberships do |f| %>
-      <%= render "membership_fields", f: f %>
-    <% end %>
-    <%= link_to_add_fields "Add Users", f, :memberships %>
-  </fieldset>
-  
+<!-- Nested attributes for memberships -->
+<%= f.fields_for :memberships do |membership_fields| %>
+  <%= render 'membership_fields', f: membership_fields %>
+<% end %>
+
+<!-- Button to add more users -->
+<%= link_to 'Add User', '#', class: 'add-user-btn', data: { role: 'add-user-btn' } %>
+
 
   
 

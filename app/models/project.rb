@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
     # trigger_project_completion_worker, if: :saved_change_to_status?
-    has_many :tasks
+    has_many :tasks, dependent: :destroy
     has_many :memberships
     has_many :users, through: :memberships
     accepts_nested_attributes_for :memberships, reject_if: :all_blank, allow_destroy: true

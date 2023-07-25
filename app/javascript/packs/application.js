@@ -2,6 +2,7 @@
 // Your other imports and configurations
 import 'search_dropdown';
 import 'tasks';
+import 'add_remove_users';
 
 // app/javascript/packs/application.js
 //= require("./nested-forms/addFields");
