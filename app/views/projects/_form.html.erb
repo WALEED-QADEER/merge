@@ -1,8 +1,8 @@
 <h3> Creator Id:  <%= current_user.id %> </h3>
-<%= form_with model: @project, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |form| %>
+<%= form_with model: @project, local: true do |f| %>
     <div>
-      <%= form.label :name %><br>
-      <%= form.text_field :name %>
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
       <% @project.errors.full_messages_for(:name).each do |message| %>
           <div><%= message %></div>
         <% end %>
@@ -12,11 +12,11 @@
 
 
 <div>
-        <%= form.label :completion_date, "Completion Date:" %>
+        <%= f.label :completion_date, "Completion Date:" %>
 <% if @project.date.present? %>
-  <%= form.datetime_field :date, value: @project.date.strftime('%Y-%m-%dT%H:%M:%S') %>
+  <%= f.datetime_field :date, value: @project.date.strftime('%Y-%m-%dT%H:%M:%S') %>
 <% else %>
-  <%= form.datetime_field :date %>
+  <%= f.datetime_field :date %>
   <% @project.errors.full_messages_for(:date).each do |message| %>
     <div><%= message %></div>
 <% end %>
@@ -24,8 +24,8 @@
 </div>
     
 <div>
-  <%= form.label :status %>
-  <%= form.select :status, Project.statuses.keys.map { |status| [status.humanize, status] } %>
+  <%= f.label :status %>
+  <%= f.select :status, Project.statuses.keys.map { |status| [status.humanize, status] } %>
   <% @project.errors.full_messages_for(:project).each do |message| %>
     <div><%= message %></div>
   <% end %>
@@ -39,7 +39,7 @@
 </style>
 
  
-<%= form.number_field :creator, :value => current_user.id, :readonly => true, class: "hidden-field"%>
+<%= f.number_field :creator, :value => current_user.id, :readonly => true, class: "hidden-field"%>
 <% @project.errors.full_messages_for(:creator).each do |message| %>
 <div><%= message %></div>
 <% end %>
@@ -48,24 +48,19 @@
 
 
 
+<fieldset>
+    <legend>Users:</legend>
+    <%= f.fields_for :memberships do |f| %>
+      <%= render "membership_fields", f: f %>
+    <% end %>
+    <%= link_to_add_fields "Add Users", f, :memberships %>
+  </fieldset>
+  
 
-<template data-nested-form-target="template">
-<%= form.fields_for :memberships, Membership.new, child_index: 'NEW_RECORD' do |membership_fields| %>
-  <%= render "member_form", f: membership_fields %>
-<% end %>
-</template>
-
-<%= form.fields_for :memberships do |membership_fields| %>
-<%= render "member_form", f: membership_fields %>
-<% end %>
-
-<!-- Inserted elements will be injected before that target. -->
-<div data-nested-form-target="target"></div>
-
-<button type="button" data-action="nested-form#add">Add User</button>
+  
 
     <div>
-      <%= form.submit %>
+      <%= f.submit %>
     </div>
   <% end %>
   
