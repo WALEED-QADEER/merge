@@ -8,6 +8,7 @@ window.Stimulus   = application
 
 export { application }
 
+
 // import "nested_form_controller";
 
 
@@ -19,6 +20,7 @@ export { application }
 // app/assets/javascripts/application.js
 
 //= require search_dropdown
+//= require add_remove_users
 //= require packs/search_dropdown
 
 //= require turbolinks

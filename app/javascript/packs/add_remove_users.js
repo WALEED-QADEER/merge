@@ -1,12 +1,11 @@
-// app/assets/javascripts/add_remove_users.js
-
+document.addEventListener("turbolinks:load", function() {
 document.addEventListener('DOMContentLoaded', function () {
   const addUserBtn = document.querySelector('[data-role="add-user-btn"]');
   addUserBtn.addEventListener('click', function (event) {
     event.preventDefault();
     addNewUserField();
   });
-
+  console.log("I am in Add & Remove");
   document.addEventListener('click', function (event) {
     if (event.target.matches('[data-role="remove-user-btn"]')) {
       event.preventDefault();
@@ -59,3 +58,5 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 });
+});
+

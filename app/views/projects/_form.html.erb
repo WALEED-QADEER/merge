@@ -1,3 +1,4 @@
+<%= javascript_include_tag('packs/add_remove_users.js') %>
 <h3> Creator Id:  <%= current_user.id %> </h3>
 <%= form_with model: @project do |f| %>
     <div>
@@ -45,9 +46,6 @@
 <% end %>
 
 
-
-
-
 <!-- Nested attributes for memberships -->
 <%= f.fields_for :memberships do |membership_fields| %>
   <%= render 'membership_fields', f: membership_fields %>
@@ -56,11 +54,7 @@
 <!-- Button to add more users -->
 <%= link_to 'Add User', '#', class: 'add-user-btn', data: { role: 'add-user-btn' } %>
 
-
-  
-
     <div>
       <%= f.submit %>
     </div>
   <% end %>
-  

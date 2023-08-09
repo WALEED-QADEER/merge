@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const categoryDropdown = document.getElementById("task_task_type");
   const statusDropdown = document.getElementById("task_status");
+  console.log("I am in task");
 
   categoryDropdown.addEventListener("change", function () {
     const selectedCategory = categoryDropdown.value;

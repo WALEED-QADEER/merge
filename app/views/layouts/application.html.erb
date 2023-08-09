@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+    <%= javascript_include_tag 'application' %>
     
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
     
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  
  
   <%= javascript_include_tag asset_path('packs/search_dropdown') %>
   <%= javascript_include_tag asset_path('packs/tasks') %>
-  <%= javascript_include_tag asset_path('packs/add_remove_users') %>
+  
+ 
  
   <%= javascript_importmap_tags %>
   </head>
@@ -23,4 +24,5 @@
   <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
+  
 </html>

@@ -5,7 +5,6 @@ import "@hotwired/turbo-rails"
 import "controllers"
 
 
-
 // import "/packs/search.js";
 // import 'select2';
 // import 'select2/dist/css/select2.css';
@@ -15,10 +14,8 @@ import "controllers"
 // app/javascript/packs/application.js
 // Add the following line to include the search_dropdown.js
 //= require search_dropdown
+//= require add_remove_users
 
-
-//= require turbolinks
-//= require_tree .
 
 //= require jquery-3.6.0.min
 //= require rails-ujs

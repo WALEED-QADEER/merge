@@ -24,6 +24,10 @@ gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
+# gem 'turbolinks', '~> 5.2.0'
+
+gem 'webpacker', '~> 5.0'
+
 # Gemfile
 gem 'active_storage_validations'
 

@@ -3,8 +3,11 @@
 
   <div class="field">
   <%= form.label :task_type %>
-  <%= form.select :task_type, options_for_select(['Feature', 'Bug']), include_blank: "Select Task Type"  %>
-</div>
+  <%= form.select :task_type do %>
+    <option value="Feature" <%= 'selected' if @task.task_type == 'Feature' %>>Feature</option>
+    <option value="Bug" <%= 'selected' if @task.task_type == 'Bug' %>>Bug</option>
+  <% end %>
+  </div>
 <% @task.errors.full_messages_for(:task_type).each do |message| %>
     <div><%= message %></div>
     <% end %>
@@ -50,12 +53,12 @@
 
   <%= text_field_tag :search_project, '', id: 'search_project' %>
   <br>
+  <% if @task.project_id.present? %>
+  
+  <%= form.select :project_id, options_for_select(project_options, @task.project_id), { include_blank: true }, id: 'project_dropdown' %>
+  <% else %>
   <%= form.select :project_id, options_for_select(project_options), { include_blank: true }, id: 'project_dropdown' %>
-
-
-
-
-
+  <% end %>
 
         <div>
         <%= form.label :completion_date, "Completion Date:" %>
@@ -103,5 +106,36 @@
       <%= form.submit %>
     </div>
   <% end %>
+  <!-- Example button to trigger page reload -->
 
+
+  <script>
+
+  
+
+  document.addEventListener("DOMContentLoaded", function () {
+  const categoryDropdown = document.getElementById("task_task_type");
+  const statusDropdown = document.getElementById("task_status");
+  console.log("I am in inner task");
+
+  categoryDropdown.addEventListener("change", function () {
+    const selectedCategory = categoryDropdown.value;
+
+    if (selectedCategory === "Bug") {
+      statusDropdown.innerHTML = `
+        <option value="pending">Pending</option>
+        <option value="in_progress">Started</option>
+        <option value="resolved">Resolved</option>
+      `;
+    } else if (selectedCategory === "Feature") {
+      statusDropdown.innerHTML = `
+        <option value="pending">Pending</option>
+        <option value="in_progress">Started</option>
+        <option value="complete">Completed</option>
+      `;
+    }
+  });
+});
+  console.log("Hello, this is client-side JavaScript!");
+</script>
   

@@ -7,6 +7,7 @@ class Task < ApplicationRecord
     validates :user_id, presence: true
     validates :project_id, presence: true
     validates :status, presence: true
+    validates :task_type, presence: true
     validates :description, presence: true, uniqueness: true
 
     has_one_attached :ss

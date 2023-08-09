@@ -1,4 +1,3 @@
-<!-- app/views/projects/_membership_fields.html.erb -->
 <div class="membership-fields">
   <%= f.collection_select :user_id, User.all, :id, :email, include_blank: "Select User" %>
   <%= link_to 'Remove', '#', class: 'remove-user-btn', data: { role: 'remove-user-btn' } %>
