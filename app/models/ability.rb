@@ -6,15 +6,14 @@ class Ability
     #
     #   user ||= User.new # guest user (not logged in)
       if user.manager?
-        can :manage, Task, created_by_id: user.id
+        can :manage, Task
         # can :manage, @task, user_id: user.id
-        can :manage, Project, creator: user.id
+        can :manage, Project
       elsif user.qa?
         can :manage, Task, created_by_id: user.id
         can :read, Project
       else
-        can :read, Task, user_id: user.id
-      
+        can :read, Task, user_id: user.id      
       end
     #   return unless user.admin?  # additional permissions for administrators
     #   can :manage, :all

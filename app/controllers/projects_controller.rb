@@ -1,10 +1,11 @@
 class ProjectsController < ApplicationController
-  load_and_authorize_resource
+  # load_and_authorize_resource
     def index
       
-        @projects = Project.accessible_by(current_ability)
+        # @projects = Project.accessible_by(current_ability)
         # Blog.accessible_by(current_ability, :update)
-        
+        @projects = Project.all
+        render json: @projects
           if params[:search_by_projectname] && params[:search_by_projectname] != ""
           @projects = Project.where("name LIKE ?","#{params[:search_by_projectname]}%").accessible_by(current_ability)
          

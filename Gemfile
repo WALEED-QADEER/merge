@@ -35,6 +35,12 @@ gem 'active_storage_validations'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+gem 'turbolinks'
+
+gem 'rspec-rails', '~> 6.0', '>= 6.0.3'
+
+
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -59,6 +65,10 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'byebug', '~> 11.1', '>= 11.1.3'
+  gem 'factory_bot_rails'
+  gem 'faker'
+
 end
 
 group :development do
@@ -74,7 +84,7 @@ group :development do
   gem 'devise', '~> 4.9', '>= 4.9.2'
   gem "cancan"
   gem 'cancancan', '~> 3.5'
-  gem 'byebug', '~> 11.1', '>= 11.1.3'
+  
   # Gemfile
 gem 'sidekiq', '~> 6.2' # Use the latest 6.x version
 
