@@ -12,8 +12,9 @@ class Ability
       elsif user.qa?
         can :manage, Task, created_by_id: user.id
         can :read, Project
-      else
-        can :read, Task, user_id: user.id      
+      elsif user.developer?
+        can :read, Task, user_id: user.id
+        cannot :manage, Project    
       end
     #   return unless user.admin?  # additional permissions for administrators
     #   can :manage, :all

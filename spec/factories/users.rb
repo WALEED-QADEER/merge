@@ -6,10 +6,10 @@ FactoryBot.define do
   end
   
   factory :manager, parent: :user do
-    role { 2 }
+    role { 1 }
   end
   
   factory :qa, parent: :user do
-    role { 1 }
+    role { 2 }
   end
 end

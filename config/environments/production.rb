@@ -4,6 +4,29 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
+
+  config.action_mailer.default_url_options = { host: 'your-production-domain.com' }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',       # Gmail SMTP server address
+    port:                 465,                   # Gmail SMTP server port
+    domain:               'your-production-domain.com',
+    user_name:            'ws338558@gmail.com',  # Your Gmail address
+    password:             'cwfwntskfbolqzzq', # Your Gmail password
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
+  
+
+
+
+
+
+
+
+
+
   config.cache_classes = true
 
   # Eager load code on boot. This eager loads most of Rails and

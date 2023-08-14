@@ -54,7 +54,13 @@ class TasksController < ApplicationController
           
          
           if @task.save
-            redirect_to @task
+            # TaskAssignMailer.task_assign_mailer(@task.task_assigned_user).deliver_now
+            # UserMailer.with(user: @user).welcome_email.deliver_later
+            
+            # TaskAssignMailer.with(@task.task_assigned_user).task_assigned_email.deliver_now
+            TaskAssignMailer.task_assigned_email(@task.task_assigned_user).deliver_now
+            # TaskAssignMailer.with(@task.task_assigned_user.email).task_assign_mail.deliver_now
+            redirect_to @task, notice: 'Task was successfully created.'
           else
             render :new, status: :unprocessable_entity
           end

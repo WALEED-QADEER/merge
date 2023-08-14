@@ -1,11 +1,14 @@
 class ProjectsController < ApplicationController
-  # load_and_authorize_resource
+  load_and_authorize_resource
     def index
       
-        # @projects = Project.accessible_by(current_ability)
+        @projects = Project.accessible_by(current_ability)
         # Blog.accessible_by(current_ability, :update)
-        @projects = Project.all
-        render json: @projects
+        # @projects = Project.all
+        respond_to do |format|
+          format.html { render :index }  # Render the HTML view
+          format.json { render json: @projects }  # Render JSON for API requests
+        end
           if params[:search_by_projectname] && params[:search_by_projectname] != ""
           @projects = Project.where("name LIKE ?","#{params[:search_by_projectname]}%").accessible_by(current_ability)
          
@@ -13,8 +16,11 @@ class ProjectsController < ApplicationController
       end
       def show
           @project = Project.find(params[:id])
-          @users = @project.users
-                   
+          # @users = @project.users
+          respond_to do |format|
+            format.html { render :show }  # Render the HTML view
+            format.json { render json: @project }  # Render JSON for API requests
+          end
       end
      
       def new
@@ -37,7 +43,7 @@ class ProjectsController < ApplicationController
           @project = Project.find(params[:id])
           @project.memberships.build
          
-  
+          redirect_back_or_to @project, alert: exception.message
           
         end
       
