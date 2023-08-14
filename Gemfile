@@ -68,6 +68,7 @@ group :development, :test do
   gem 'byebug', '~> 11.1', '>= 11.1.3'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'rails-controller-testing'
 
 end
 

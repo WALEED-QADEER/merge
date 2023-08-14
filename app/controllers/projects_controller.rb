@@ -43,7 +43,7 @@ class ProjectsController < ApplicationController
           @project = Project.find(params[:id])
           @project.memberships.build
          
-          redirect_back_or_to @project, alert: exception.message
+          # redirect_back_or_to @project
           
         end
       
@@ -66,7 +66,7 @@ class ProjectsController < ApplicationController
           @project = Project.find(params[:id])
           @project.destroy
       
-          redirect_to project_path, status: :see_other
+          redirect_to projects_path, status: :see_other
         end
   
        
